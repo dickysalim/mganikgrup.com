@@ -141,21 +141,39 @@ document.addEventListener('DOMContentLoaded', () => {
     // Result: 0,1,2,3,4,-5,-4,-3,-2,-1
     // Visible slots: 0(center), ±1(adjacent), ±2(edge)
 
-    // Sizing config
-    const BASE_W = 480;
-    const GAP = 20;
+    // Sizing config — responsive
+    var isMobile = window.innerWidth <= 768;
+    var BASE_W = isMobile ? 240 : 480;
+    const GAP = isMobile ? 10 : 20;
 
     function getScale(absPos) {
       if (absPos === 0) return 1;
       if (absPos === 1) return 0.72;
+      if (isMobile) return 0; // hide ±2 on mobile
       return 0.5;
     }
     function getOpacity(absPos) {
       if (absPos === 0) return 1;
       if (absPos === 1) return 0.7;
+      if (isMobile) return 0; // hide ±2 on mobile
       if (absPos === 2) return 0.5;
       return 0;
     }
+
+    // Recalc on resize
+    window.addEventListener('resize', function() {
+      isMobile = window.innerWidth <= 768;
+      BASE_W = isMobile ? 240 : 480;
+      var currentGap = isMobile ? 10 : 20;
+      // Recompute slot offsets
+      slotOffsets.length = 1;
+      for (let p = 1; p <= half; p++) {
+        const prevVW = BASE_W * getScale(p - 1);
+        const currVW = BASE_W * getScale(p);
+        slotOffsets[p] = slotOffsets[p - 1] + prevVW / 2 + currentGap + currVW / 2;
+      }
+      renderAll();
+    });
 
     // Precompute center offsets for positions 0-5
     const slotOffsets = [0];
@@ -285,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
     startAutoPlay();
   }
 
-  // --- Brands Vertical Carousel ---
+  // --- Brands Carousel (vertical on desktop, horizontal on mobile) ---
   (function() {
     const track = document.getElementById('brandsTrack');
     const viewport = document.getElementById('brandsCarousel');
@@ -294,12 +312,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const rows = Array.from(track.querySelectorAll('.brand-row'));
     const count = rows.length; // 3
-    const ROW_H = 480;
     let current = 0;
     let autoTimer = null;
     let resumeTimer = null;
 
-    // Clone first slide and append for seamless loop
+    function isMobile() {
+      return window.innerWidth <= 768;
+    }
+
+    // Clone first slide for seamless loop
     const firstClone = rows[0].cloneNode(true);
     track.appendChild(firstClone);
 
@@ -309,13 +330,20 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         track.style.transition = 'none';
       }
-      track.style.transform = 'translateY(-' + (index * ROW_H) + 'px)';
+
+      if (isMobile()) {
+        var slideW = viewport.offsetWidth;
+        track.style.transform = 'translateX(-' + (index * slideW) + 'px)';
+      } else {
+        var ROW_H = 480;
+        track.style.transform = 'translateY(-' + (index * ROW_H) + 'px)';
+      }
       updateDots(index % count);
     }
 
     function updateDots(realIndex) {
       if (!dotsContainer) return;
-      const dots = dotsContainer.querySelectorAll('.brands__dot');
+      var dots = dotsContainer.querySelectorAll('.brands__dot');
       dots.forEach(function(dot, i) {
         dot.classList.toggle('brands__dot--active', i === realIndex);
       });
@@ -360,27 +388,27 @@ document.addEventListener('DOMContentLoaded', () => {
       resumeTimer = setTimeout(startAuto, 5000);
     }
 
-    // Dot click navigation
-    if (dotsContainer) {
-      dotsContainer.addEventListener('click', function(e) {
-        var dot = e.target.closest('.brands__dot');
-        if (!dot) return;
-        current = parseInt(dot.getAttribute('data-index'));
-        goTo(current, true);
-        pauseAndResume();
-      });
-    }
+    // Dot click — works on all dot sets
+    viewport.addEventListener('click', function(e) {
+      var dot = e.target.closest('.brands__dot');
+      if (!dot) return;
+      current = parseInt(dot.getAttribute('data-index'));
+      goTo(current, true);
+      pauseAndResume();
+    });
 
-    // Drag/swipe (vertical)
-    var dragging = false, startY = 0, dist = 0;
+    // Drag/swipe — detect axis based on mode
+    var dragging = false, startPos = 0, dist = 0;
 
     viewport.addEventListener('mousedown', function(e) {
       e.preventDefault();
-      dragging = true; startY = e.clientY; dist = 0;
+      dragging = true;
+      startPos = isMobile() ? e.clientX : e.clientY;
+      dist = 0;
       pauseAndResume();
     });
     window.addEventListener('mousemove', function(e) {
-      if (dragging) dist = e.clientY - startY;
+      if (dragging) dist = (isMobile() ? e.clientX : e.clientY) - startPos;
     });
     window.addEventListener('mouseup', function() {
       if (!dragging) return;
@@ -390,17 +418,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     viewport.addEventListener('touchstart', function(e) {
-      dragging = true; startY = e.touches[0].clientY; dist = 0;
+      dragging = true;
+      startPos = isMobile() ? e.touches[0].clientX : e.touches[0].clientY;
+      dist = 0;
       pauseAndResume();
     }, { passive: true });
     viewport.addEventListener('touchmove', function(e) {
-      if (dragging) dist = e.touches[0].clientY - startY;
+      if (dragging) dist = (isMobile() ? e.touches[0].clientX : e.touches[0].clientY) - startPos;
     }, { passive: true });
     viewport.addEventListener('touchend', function() {
       if (!dragging) return;
       dragging = false;
       if (dist < -40) next();
       else if (dist > 40) prev();
+    });
+
+    // Recalc on resize
+    window.addEventListener('resize', function() {
+      goTo(current, false);
     });
 
     // Init
@@ -417,40 +452,28 @@ document.addEventListener('DOMContentLoaded', () => {
     var captions = [
       { title: 'PIAGAM PENGHARGAAN mGANIK MULTIGRAIN', desc: 'Recognized as a pioneering superfood brand in Indonesia for metabolic health innovation.' },
       { title: 'TOP BRAND AWARD 2024', desc: 'Awarded for exceptional brand performance and consumer trust in the functional food category.' },
-      { title: 'INDONESIA BEST INNOVATION', desc: 'Celebrated for breakthrough product development in science-based nutritional solutions.' },
-      { title: 'HEALTH PRODUCT OF THE YEAR', desc: 'Honored for delivering measurable health outcomes through accessible metabolic health products.' },
-      { title: 'DIGITAL MARKETING EXCELLENCE', desc: 'Acknowledged for outstanding digital strategy and community engagement in the health sector.' }
+      { title: 'INDONESIA BEST INNOVATION', desc: 'Celebrated for breakthrough product development in science-based nutritional solutions.' }
     ];
 
-    var origSlides = track.querySelectorAll('.awards__slide');
-    var N = origSlides.length;
-    // Clone slides twice for seamless infinite scroll (no visible recycling)
-    for (var c = 0; c < 2; c++) {
-      origSlides.forEach(function(s) {
-        track.appendChild(s.cloneNode(true));
-      });
-    }
     var allSlides = track.querySelectorAll('.awards__slide');
-    var total = allSlides.length; // 15
+    var N = allSlides.length; // 3
     var center = 0;
     var autoTimer = null, resumeTimer = null;
 
-    // Positions with more spacing: center, ±1 adjacent, ±2 edges
+    // Positions: center + left/right overlapping slightly
     var posMap = {
       '0':  { pct: 50, scale: 1 },
-      '1':  { pct: 74, scale: 0.72 },
-      '-1': { pct: 26, scale: 0.72 },
-      '2':  { pct: 88, scale: 0.55 },
-      '-2': { pct: 12, scale: 0.55 }
+      '1':  { pct: 75, scale: 0.7 },
+      '-1': { pct: 25, scale: 0.7 }
     };
 
     function renderAll(animate) {
-      for (var i = 0; i < total; i++) {
+      for (var i = 0; i < N; i++) {
         var slide = allSlides[i];
         var diff = i - center;
-        // Wrap into range
-        while (diff > total / 2) diff -= total;
-        while (diff < -total / 2) diff += total;
+        // Wrap into range for 3 items
+        if (diff > Math.floor(N / 2)) diff -= N;
+        if (diff < -Math.floor(N / 2)) diff += N;
 
         if (animate === false) {
           slide.classList.add('no-transition');
@@ -474,11 +497,10 @@ document.addEventListener('DOMContentLoaded', () => {
           } else {
             slide.style.filter = 'blur(2px) saturate(0.5) brightness(0.85)';
             slide.style.boxShadow = 'none';
-            slide.style.zIndex = Math.abs(diff) === 1 ? 3 : 1;
+            slide.style.zIndex = 3;
             slide.style.pointerEvents = 'none';
           }
         } else {
-          // Hidden slides — position them off-screen silently
           slide.style.opacity = '0';
           slide.style.pointerEvents = 'none';
           slide.style.zIndex = 0;
@@ -496,29 +518,16 @@ document.addEventListener('DOMContentLoaded', () => {
       if (descEl) descEl.textContent = captions[idx].desc;
     }
 
-    function recycle() {
-      // If center drifts too far, silently reset to a middle clone region
-      if (center >= N * 2) {
-        center -= N;
-        renderAll(false);
-      } else if (center < 0) {
-        center += N;
-        renderAll(false);
-      }
-    }
-
     function advance() {
-      center++;
+      center = (center + 1) % N;
       renderAll(true);
       updateCaption();
-      setTimeout(recycle, 750);
     }
 
     function retreat() {
-      center--;
+      center = (center - 1 + N) % N;
       renderAll(true);
       updateCaption();
-      setTimeout(recycle, 750);
     }
 
     function startAuto() {
