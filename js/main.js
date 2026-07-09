@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Scroll reveal animations ---
   const observerOptions = {
     root: null,
-    rootMargin: '0px 0px -80px 0px',
+    rootMargin: '0px 0px -60px 0px',
     threshold: 0.1,
   };
 
@@ -32,9 +32,77 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, observerOptions);
 
-  document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach((el) => {
+  document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .scale-in, .blur-in').forEach((el) => {
     revealObserver.observe(el);
   });
+
+  // --- Scroll Progress Bar ---
+  const scrollProgress = document.getElementById('scrollProgress');
+  
+  const updateScrollProgress = () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    if (scrollProgress) {
+      scrollProgress.style.width = scrollPercent + '%';
+    }
+  };
+
+  // --- Hero Parallax (mouse tracking) ---
+  const hero = document.querySelector('.hero');
+  const heroShapeLeft = document.querySelector('.hero__shape--left');
+  const heroShapeRight = document.querySelector('.hero__shape--right');
+
+  if (hero && heroShapeLeft && heroShapeRight) {
+    hero.addEventListener('mousemove', (e) => {
+      const rect = hero.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+      heroShapeLeft.style.transform = `translateY(-50%) translate(${x * -25}px, ${y * -15}px) rotate(${x * 5}deg)`;
+      heroShapeRight.style.transform = `translateY(-50%) translate(${x * 25}px, ${y * -15}px) rotate(${x * -5}deg)`;
+    });
+
+    hero.addEventListener('mouseleave', () => {
+      heroShapeLeft.style.transform = 'translateY(-50%)';
+      heroShapeRight.style.transform = 'translateY(-50%)';
+    });
+  }
+
+  // --- Parallax on Scroll ---
+  const milestoneShape4 = document.querySelector('.milestone__shape--4');
+  const milestoneShape3 = document.querySelector('.milestone__shape--3');
+
+  const handleParallax = () => {
+    const scrollY = window.scrollY;
+
+    // Milestone shapes depth parallax
+    if (milestoneShape4) {
+      const speed = 0.15;
+      milestoneShape4.style.transform = `translateY(${scrollY * speed}px)`;
+    }
+    if (milestoneShape3) {
+      const speed = 0.08;
+      milestoneShape3.style.transform = `translateY(${scrollY * speed}px)`;
+    }
+  };
+
+  // Combined scroll handler (throttled via rAF)
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateScrollProgress();
+        handleParallax();
+        handleNavbarScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // Remove the old separate scroll listener for navbar
+  window.removeEventListener('scroll', handleNavbarScroll);
 
   // --- Counter animation ---
   const counters = document.querySelectorAll('.milestone__stat-number');

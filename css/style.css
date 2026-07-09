@@ -1275,12 +1275,13 @@ p {
 }
 
 /* ===================================================
-   ANIMATIONS
+   ANIMATIONS — SCROLL REVEALS
    =================================================== */
 .fade-in {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .fade-in.visible {
@@ -1290,8 +1291,9 @@ p {
 
 .fade-in-left {
   opacity: 0;
-  transform: translateX(-30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateX(-50px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .fade-in-left.visible {
@@ -1301,13 +1303,209 @@ p {
 
 .fade-in-right {
   opacity: 0;
-  transform: translateX(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateX(50px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .fade-in-right.visible {
   opacity: 1;
   transform: translateX(0);
+}
+
+/* Scale-in reveal */
+.scale-in {
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scale-in.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Blur-in reveal */
+.blur-in {
+  opacity: 0;
+  filter: blur(12px);
+  transform: translateY(20px);
+  transition: opacity 0.9s ease,
+              filter 0.9s ease,
+              transform 0.9s ease;
+}
+
+.blur-in.visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+/* Stagger children delays */
+.stagger-children > *:nth-child(1) { transition-delay: 0s; }
+.stagger-children > *:nth-child(2) { transition-delay: 0.15s; }
+.stagger-children > *:nth-child(3) { transition-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { transition-delay: 0.45s; }
+.stagger-children > *:nth-child(5) { transition-delay: 0.6s; }
+
+/* ===================================================
+   ANIMATIONS — HERO PARALLAX
+   =================================================== */
+.hero__shape {
+  transition: transform 0.1s linear;
+  will-change: transform;
+}
+
+.hero__title {
+  animation: heroTextReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero__subtitle {
+  animation: heroFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+@keyframes heroTextReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes heroFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Floating hero shapes */
+.hero__shape--left {
+  animation: floatLeft 6s ease-in-out infinite;
+}
+
+.hero__shape--right {
+  animation: floatRight 7s ease-in-out infinite;
+}
+
+@keyframes floatLeft {
+  0%, 100% { transform: translateY(-50%) rotate(0deg); }
+  50% { transform: translateY(-50%) rotate(3deg) translateX(10px); }
+}
+
+@keyframes floatRight {
+  0%, 100% { transform: translateY(-50%) rotate(0deg); }
+  50% { transform: translateY(-50%) rotate(-3deg) translateX(-10px); }
+}
+
+/* ===================================================
+   ANIMATIONS — BRAND CARDS 3D TILT
+   =================================================== */
+.brand-card {
+  transform-style: preserve-3d;
+  perspective: 800px;
+}
+
+.brand-card:hover {
+  transform: translateY(-8px) rotateX(2deg);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+}
+
+.brand-card__image img {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand-card:hover .brand-card__image img {
+  transform: scale(1.08);
+}
+
+/* ===================================================
+   ANIMATIONS — MILESTONE GLOW
+   =================================================== */
+.milestone__stat-number {
+  transition: text-shadow 0.5s ease;
+}
+
+.milestone__stat:hover .milestone__stat-number {
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.4),
+               0 0 60px rgba(255, 255, 255, 0.15);
+}
+
+.milestone__card {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s ease;
+}
+
+.milestone__card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* ===================================================
+   ANIMATIONS — ECOSYSTEM CARDS
+   =================================================== */
+.ecosystem__card {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s ease;
+}
+
+.ecosystem__card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+}
+
+.ecosystem__card-image img {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ecosystem__card:hover .ecosystem__card-image img {
+  transform: scale(1.06);
+}
+
+/* ===================================================
+   ANIMATIONS — SCROLL PROGRESS BAR
+   =================================================== */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #D46945, #ED3E59, #3E5D58);
+  width: 0%;
+  z-index: 9999;
+  transition: width 0.05s linear;
+  border-radius: 0 2px 2px 0;
+}
+
+/* ===================================================
+   ANIMATIONS — PARALLAX LAYERS
+   =================================================== */
+.parallax-layer {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+/* Milestone shapes parallax */
+.milestone__shape {
+  transition: transform 0.1s linear;
+  will-change: transform;
+}
+
+/* ===================================================
+   ANIMATIONS — AWARDS SLIDE GLOW
+   =================================================== */
+.awards__slide img {
+  transition: transform 0.7s ease, filter 0.7s ease;
 }
 
 /* Counter animation */

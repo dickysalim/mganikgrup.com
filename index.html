@@ -10,9 +10,12 @@
   <link href="https://fonts.cdnfonts.com/css/general-sans" rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="css/style.css?v=7">
+  <link rel="stylesheet" href="css/style.css?v=8">
 </head>
 <body>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
 
   <!-- ===== NAVBAR ===== -->
   <nav class="navbar" id="navbar">
@@ -45,8 +48,8 @@
         <h2 class="ecosystem__title">Our Ecosystem</h2>
       </div>
 
-      <div class="ecosystem__grid">
-        <div class="ecosystem__card fade-in">
+      <div class="ecosystem__grid stagger-children">
+        <div class="ecosystem__card scale-in">
           <div class="ecosystem__card-image">
             <img src="assets/image-health.png" alt="Health - Medical professionals providing care">
           </div>
@@ -54,7 +57,7 @@
           <p>We focus on the root of metabolic conditions through clinical care, helping patients receive their interventions along their recovery journey more than intervention alone.</p>
         </div>
 
-        <div class="ecosystem__card fade-in">
+        <div class="ecosystem__card scale-in">
           <div class="ecosystem__card-image">
             <img src="assets/image-technology.png" alt="Technology - Digital solutions and data-driven insights">
           </div>
@@ -62,7 +65,7 @@
           <p>Through digital systems and data-driven insights, we create smarter approaches to metabolic health management and better health outcomes using technology and public engagement.</p>
         </div>
 
-        <div class="ecosystem__card fade-in">
+        <div class="ecosystem__card scale-in">
           <div class="ecosystem__card-image">
             <img src="assets/image-progressive.png" alt="Progressive - Innovation in traditional nutrition">
           </div>
@@ -118,7 +121,7 @@
         <p>Reflecting the scale of an integrated approach to metabolic health, built across clinical care, nutrition, and continuous support systems.</p>
       </div>
 
-      <div class="milestone__stats fade-in">
+      <div class="milestone__stats blur-in">
         <div class="milestone__stat">
           <div class="milestone__stat-number" data-target="1000000">1,000,000+</div>
           <div class="milestone__stat-label">Individual Reached</div>
@@ -133,19 +136,19 @@
         </div>
       </div>
 
-      <div class="milestone__cards fade-in">
-        <div class="milestone__card milestone__card--image">
+      <div class="milestone__cards stagger-children">
+        <div class="milestone__card milestone__card--image scale-in">
           <img src="assets/image-5years-experience.png" alt="5+ Years of Experience">
         </div>
-        <div class="milestone__card milestone__card--stat milestone__card--stat-light">
+        <div class="milestone__card milestone__card--stat milestone__card--stat-light scale-in">
           <div class="milestone__card-number">5+</div>
           <div class="milestone__card-title">Years of Experience</div>
           <div class="milestone__card-desc">Built on continuous development across nutrition, clinical care, and integrated health systems.</div>
         </div>
-        <div class="milestone__card milestone__card--image">
+        <div class="milestone__card milestone__card--image scale-in">
           <img src="assets/image-diabetic-handled.webp" alt="600+ Diabetic Cases Handled">
         </div>
-        <div class="milestone__card milestone__card--stat milestone__card--stat-dark">
+        <div class="milestone__card milestone__card--stat milestone__card--stat-dark scale-in">
           <div class="milestone__card-number">600+</div>
           <div class="milestone__card-title">Diabetic Case Handled</div>
           <div class="milestone__card-desc">Managed through structured care programs with continuous monitoring and targeted intervention.</div>
@@ -163,9 +166,9 @@
         <h2>Our Portfolio</h2>
         <p class="brands__subtitle">Three pillars of metabolic health — from nutrition to clinical care to lifestyle vitality.</p>
       </div>
-      <div class="brands__grid fade-in">
+      <div class="brands__grid stagger-children">
         <!-- mGanik Nutrition -->
-        <div class="brand-card brand-card--orange">
+        <div class="brand-card brand-card--orange scale-in">
           <div class="brand-card__image">
             <img src="assets/image-mganik-product.png" alt="mGanik Nutrition - Superfood & Metafiber products">
           </div>
@@ -176,7 +179,7 @@
         </div>
 
         <!-- mGanik Care -->
-        <div class="brand-card brand-card--teal">
+        <div class="brand-card brand-card--teal scale-in">
           <div class="brand-card__image">
             <img src="assets/image-mganik-care-clinic.png" alt="mGanik Care - Klinik Diabetes">
           </div>
@@ -187,7 +190,7 @@
         </div>
 
         <!-- GOLO -->
-        <div class="brand-card brand-card--pink">
+        <div class="brand-card brand-card--pink scale-in">
           <div class="brand-card__image">
             <img src="assets/image-golo-product.png" alt="GOLO Products">
           </div>
@@ -329,6 +332,6 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="js/main.js?v=8"></script>
+  <script src="js/main.js?v=9"></script>
 </body>
 </html>
