@@ -798,116 +798,98 @@ p {
 }
 
 /* ===================================================
-   BRANDS SECTION
+   BRANDS / PORTFOLIO SECTION
    =================================================== */
 .brands {
-  padding: 0;
+  background-color: var(--navy);
+  background-image: linear-gradient(180deg, #0F1C2E 0%, #142439 50%, #0F1C2E 100%);
+  padding: 40px 0 100px;
 }
 
-.brands__viewport {
-  position: relative;
-  width: 100%;
-  height: 480px;
-  overflow: hidden;
-  cursor: grab;
-  user-select: none;
+.brands__header {
+  text-align: center;
+  margin-bottom: 48px;
 }
 
-.brands__viewport:active {
-  cursor: grabbing;
-}
-
-.brands__track {
-  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.brands__dots {
-  position: absolute;
-  right: 40px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 10;
-}
-
-.brands__dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.6);
-  background: transparent;
-  cursor: pointer;
-  padding: 0;
-  transition: all 0.3s ease;
-}
-
-.brands__dot--active {
-  background: var(--white);
-  border-color: var(--white);
-}
-
-.brand-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  height: 480px;
-}
-
-.brand-image {
-  overflow: hidden;
-  position: relative;
-}
-
-.brand-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.brand-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 60px 100px 60px 60px;
-}
-
-.brand-info--orange {
-  background-color: #D46945;
-  color: var(--white);
-}
-
-.brand-info--teal {
-  background-color: #3E5D58;
-  color: var(--white);
-}
-
-.brand-info--pink {
-  background-color: #ED3E59;
-  color: var(--white);
-}
-
-.brand-info__logo {
-  height: 60px;
-  width: auto;
-  margin-bottom: 20px;
-  object-fit: contain;
-  align-self: flex-start;
-}
-
-.brand-info h3 {
-  font-size: 24px;
+.brands__header h2 {
+  font-size: 40px;
   font-weight: 600;
   color: var(--white);
   margin-bottom: 16px;
 }
 
-.brand-info p {
+.brands__subtitle {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 680px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.brands__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.brand-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.brand-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.brand-card__image {
+  height: 240px;
+  overflow: hidden;
+}
+
+.brand-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.brand-card:hover .brand-card__image img {
+  transform: scale(1.05);
+}
+
+.brand-card__info {
+  padding: 28px 28px 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-card--orange .brand-card__info {
+  background-color: #D46945;
+}
+
+.brand-card--teal .brand-card__info {
+  background-color: #3E5D58;
+}
+
+.brand-card--pink .brand-card__info {
+  background-color: #ED3E59;
+}
+
+.brand-card__logo {
+  height: 48px;
+  width: auto;
+  margin-bottom: 16px;
+  object-fit: contain;
+  align-self: flex-start;
+}
+
+.brand-card__info p {
   font-size: 14px;
-  line-height: 1.8;
+  line-height: 1.7;
   color: rgba(255, 255, 255, 0.85);
-  text-align: justify;
-  max-width: 320px;
 }
 
 /* ===================================================
@@ -1574,89 +1556,30 @@ p {
     display: none;
   }
 
-  /* --- Brands (horizontal carousel on mobile) --- */
-  .brands__viewport {
-    height: auto;
-    overflow: hidden;
-    position: relative;
+  /* --- Brands / Portfolio --- */
+  .brands__header h2 {
+    font-size: 32px;
   }
 
-  .brands__track {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
+  .brands__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
-  .brand-row {
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    min-width: 100%;
-    width: 100%;
-    flex-shrink: 0;
-    box-sizing: border-box;
+  .brand-card__image {
+    height: 200px;
   }
 
-  .brand-image {
-    height: 220px;
-    width: 100%;
-    overflow: hidden;
+  .brand-card__info {
+    padding: 24px;
   }
 
-  .brand-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .brand-card__logo {
+    height: 36px;
   }
 
-  .brand-info {
-    padding: 24px 24px 40px;
-    width: 100%;
-    box-sizing: border-box;
-    height: 260px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  .brand-info__logo {
-    height: 40px;
-    flex-shrink: 0;
-  }
-
-  .brand-info h3 {
-    font-size: 20px;
-    flex-shrink: 0;
-  }
-
-  .brand-info p {
+  .brand-card__info p {
     font-size: 13px;
-    max-width: 100%;
-    line-height: 1.6;
-    flex: 1;
-    overflow: hidden;
-  }
-
-  /* Dots overlay at bottom of carousel */
-  .brands__dots {
-    position: absolute;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    right: auto;
-    top: auto;
-    flex-direction: row;
-    gap: 10px;
-    z-index: 10;
-  }
-
-  .brands__dot {
-    border-color: rgba(255, 255, 255, 0.5);
-  }
-
-  .brands__dot--active {
-    background: var(--white);
-    border-color: var(--white);
   }
 
   /* --- Products --- */
@@ -1769,6 +1692,7 @@ p {
   .ecosystem__title,
   .why-we-exist__heading h2,
   .milestone__header h2,
+  .brands__header h2,
   .awards__header h2 {
     font-size: 26px;
   }
