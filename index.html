@@ -10,18 +10,21 @@
   <link href="https://fonts.cdnfonts.com/css/general-sans" rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="css/style.css?v=8">
+  <link rel="stylesheet" href="css/style.css?v=12">
 </head>
 <body>
 
+  <!-- Full-page ambient particle canvas -->
+  <canvas id="ambientParticles" aria-hidden="true"></canvas>
+
   <!-- Scroll Progress Bar -->
-  <div class="scroll-progress" id="scrollProgress"></div>
+
 
   <!-- ===== NAVBAR ===== -->
   <nav class="navbar" id="navbar">
     <div class="container">
       <a href="#" class="navbar__logo">
-        <img src="assets/header-logo-mgmi.png" alt="MGMI - mGanik Grup Mitra Indonesia">
+        <img src="branding_assets/mgmi_logo_gold_black.webp" alt="MGMI - mGanik Grup Mitra Indonesia">
       </a>
       <div class="navbar__links"></div>
       <div class="navbar__cta">
@@ -32,65 +35,17 @@
 
   <!-- ===== HERO ===== -->
   <section class="hero" id="hero">
-    <img src="assets/shape-1.png" alt="" class="hero__shape hero__shape--left" aria-hidden="true">
-    <img src="assets/shape-2.png" alt="" class="hero__shape hero__shape--right" aria-hidden="true">
+    <canvas class="hero__wave-canvas" id="heroWaveCanvas" aria-hidden="true"></canvas>
+    <div class="hero__bg-glow" aria-hidden="true"></div>
+    <div class="hero__grain" aria-hidden="true"></div>
 
     <div class="hero__content">
-      <h1 class="hero__title">Building The Future of<br>Metabolic Solution</h1>
-      <p class="hero__subtitle">Delivering integrated metabolic health solutions through a combination of nutrition, clinical expertise, and continuous patient support. Since 2019, mGanik Group has specialized in metabolic access, disease-specific community efforts, and sustainable health ecosystem.</p>
-    </div>
-  </section>
-
-  <!-- ===== OUR ECOSYSTEM ===== -->
-  <section class="ecosystem section" id="ecosystem">
-    <div class="container">
-      <div class="ecosystem__header fade-in">
-        <h2 class="ecosystem__title">Our Ecosystem</h2>
-      </div>
-
-      <div class="ecosystem__grid stagger-children">
-        <div class="ecosystem__card scale-in">
-          <div class="ecosystem__card-image">
-            <img src="assets/image-health.png" alt="Health - Medical professionals providing care">
-          </div>
-          <h3>Health</h3>
-          <p>We focus on the root of metabolic conditions through clinical care, helping patients receive their interventions along their recovery journey more than intervention alone.</p>
-        </div>
-
-        <div class="ecosystem__card scale-in">
-          <div class="ecosystem__card-image">
-            <img src="assets/image-technology.png" alt="Technology - Digital solutions and data-driven insights">
-          </div>
-          <h3>Technology</h3>
-          <p>Through digital systems and data-driven insights, we create smarter approaches to metabolic health management and better health outcomes using technology and public engagement.</p>
-        </div>
-
-        <div class="ecosystem__card scale-in">
-          <div class="ecosystem__card-image">
-            <img src="assets/image-progressive.png" alt="Progressive - Innovation in traditional nutrition">
-          </div>
-          <h3>Progressive</h3>
-          <p>We challenge the boundaries of traditional care to explore new nutritional innovations, research-backed approaches, and scalable health ecosystem models with lasting impact.</p>
-        </div>
-      </div>
-
-      </div>
-  </section>
-
-  <!-- ===== WHY WE EXIST ===== -->
-  <section class="why-we-exist" id="why-we-exist">
-    <div class="container">
-      <div class="why-we-exist__top">
-        <div class="why-we-exist__heading fade-in-left">
-          <h2>Why We Exist</h2>
-        </div>
-        <div class="why-we-exist__text fade-in-right">
-          <p>Through a system designed for long-term outcomes, we empower individuals to better manage their health and move toward a more sustainable quality of life.</p>
-        </div>
-      </div>
+      <img src="branding_assets/01. Primary Logo with Label/primary logo on black@2x.png" alt="MGMI" class="hero__logo">
+      <h1 class="hero__title">Building the Future of <span class="hero__highlight">Metabolic Health</span></h1>
+      <p class="hero__subtitle">By combining <span class="hero__highlight">health, technology, and continuous progress</span>, we create an integrated ecosystem that helps people achieve better metabolic health.</p>
     </div>
 
-    <div class="why-we-exist__carousel" id="wweCarousel">
+    <div class="why-we-exist__carousel hero__carousel" id="wweCarousel">
       <div class="why-we-exist__carousel-track">
         <div class="why-we-exist__slide">
           <img src="assets/Carousel Testi/Carousel 1.webp" alt="Testimonial 1">
@@ -111,118 +66,152 @@
     </div>
   </section>
 
-  <!-- ===== COMPANY MILESTONE ===== -->
-  <section class="milestone section" id="milestone">
-    <img src="assets/shape-4.png" alt="" class="milestone__shape milestone__shape--4">
-    <img src="assets/shape-3.png" alt="" class="milestone__shape milestone__shape--3">
-    <div class="container">
-      <div class="milestone__header fade-in">
-        <h2>Company Milestone</h2>
-        <p>Reflecting the scale of an integrated approach to metabolic health, built across clinical care, nutrition, and continuous support systems.</p>
-      </div>
-
-      <div class="milestone__stats blur-in">
-        <div class="milestone__stat">
-          <div class="milestone__stat-number" data-target="1000000">1,000,000+</div>
-          <div class="milestone__stat-label">Individual Reached</div>
-        </div>
-        <div class="milestone__stat">
-          <div class="milestone__stat-number" data-target="500">500+</div>
-          <div class="milestone__stat-label">Distribution Partners</div>
-        </div>
-        <div class="milestone__stat">
-          <div class="milestone__stat-number" data-target="38">38</div>
-          <div class="milestone__stat-label">Province Coverage</div>
-        </div>
-      </div>
-
-      <div class="milestone__cards stagger-children">
-        <div class="milestone__card milestone__card--image scale-in">
-          <img src="assets/image-5years-experience.png" alt="5+ Years of Experience">
-        </div>
-        <div class="milestone__card milestone__card--stat milestone__card--stat-light scale-in">
-          <div class="milestone__card-number">5+</div>
-          <div class="milestone__card-title">Years of Experience</div>
-          <div class="milestone__card-desc">Built on continuous development across nutrition, clinical care, and integrated health systems.</div>
-        </div>
-        <div class="milestone__card milestone__card--image scale-in">
-          <img src="assets/image-diabetic-handled.webp" alt="600+ Diabetic Cases Handled">
-        </div>
-        <div class="milestone__card milestone__card--stat milestone__card--stat-dark scale-in">
-          <div class="milestone__card-number">600+</div>
-          <div class="milestone__card-title">Diabetic Case Handled</div>
-          <div class="milestone__card-desc">Managed through structured care programs with continuous monitoring and targeted intervention.</div>
-        </div>
-      </div>
-
-      <p class="milestone__statement fade-in">At mGanik Group, we are building an integrated approach to metabolic health by combining clinical care, nutrition, and continuous support.</p>
-    </div>
-  </section>
-
-  <!-- ===== BRANDS / PORTFOLIO ===== -->
-  <section class="brands section" id="brands">
+  <!-- ===== OUR BRAND PORTFOLIO ===== -->
+  <section class="brands section" id="ecosystem">
+    <!-- Decorative floating orbs -->
+    <div class="deco-orb deco-orb--1" data-parallax="0.08" aria-hidden="true"></div>
+    <div class="deco-orb deco-orb--2" data-parallax="-0.12" aria-hidden="true"></div>
+    <div class="deco-orb deco-orb--3" data-parallax="0.06" aria-hidden="true"></div>
     <div class="container">
       <div class="brands__header fade-in">
-        <h2>Our Portfolio</h2>
-        <p class="brands__subtitle">Three pillars of metabolic health — from nutrition to clinical care to lifestyle vitality.</p>
+        <h3>Our Brand Portfolio</h3>
       </div>
       <div class="brands__grid stagger-children">
         <!-- mGanik Nutrition -->
         <div class="brand-card brand-card--orange scale-in">
           <div class="brand-card__image">
-            <img src="assets/image-mganik-product.png" alt="mGanik Nutrition - Superfood & Metafiber products">
+            <img src="assets/image-mganik-product_opt.jpg" alt="mGanik Nutrition - Superfood & Metafiber products" loading="lazy">
           </div>
           <div class="brand-card__info">
             <img src="assets/logo-mganik-nutrition.webp" alt="mGanik Nutrition" class="brand-card__logo">
             <p>mGanik Nutrition provides natural, science-based nutritional solutions designed to support metabolic health and daily blood sugar management.</p>
+            <a href="https://nutrition.mganik.com/" target="_blank" rel="noopener" class="brand-card__btn">Learn More →</a>
           </div>
         </div>
 
         <!-- mGanik Care -->
         <div class="brand-card brand-card--teal scale-in">
           <div class="brand-card__image">
-            <img src="assets/image-mganik-care-clinic.png" alt="mGanik Care - Klinik Diabetes">
+            <img src="assets/image-mganik-care-clinic_opt.jpg" alt="mGanik Care - Klinik Diabetes" loading="lazy">
           </div>
           <div class="brand-card__info">
             <img src="assets/logo-mganik-care.webp" alt="mGanik Care" class="brand-card__logo">
             <p>mGanik Care delivers specialized clinical services focused on diabetes and metabolic conditions through a structured and holistic approach.</p>
+            <a href="https://care.mganik.com/" target="_blank" rel="noopener" class="brand-card__btn">Learn More →</a>
           </div>
         </div>
 
         <!-- GOLO -->
         <div class="brand-card brand-card--pink scale-in">
           <div class="brand-card__image">
-            <img src="assets/image-golo-product.png" alt="GOLO Products">
+            <img src="assets/image-golo-product_opt.jpg" alt="GOLO Products" loading="lazy">
           </div>
           <div class="brand-card__info">
             <img src="assets/logo-golo.webp" alt="GOLO" class="brand-card__logo">
             <p>GOLO is a lifestyle brand focused on male vitality, addressing performance and confidence through solutions rooted in metabolic health.</p>
+            <a href="https://pages.mistergolo.co.id/" target="_blank" rel="noopener" class="brand-card__btn">Learn More →</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== HONORS & AWARDS ===== -->
-  <section class="awards section" id="awards">
-    <div class="container">
-      <div class="awards__header fade-in">
-        <h2>Honors & Awards</h2>
-      </div>
 
-      <div class="awards__carousel" id="awardsCarousel">
-        <div class="awards__carousel-track" id="awardsTrack">
-          <div class="awards__slide">
-            <img src="assets/Awards/Awards 1.png" alt="Award 1">
-          </div>
-          <div class="awards__slide">
-            <img src="assets/Awards/Awards 2.png" alt="Award 2">
-          </div>
-          <div class="awards__slide">
-            <img src="assets/Awards/Awards 3.png" alt="Award 3">
+
+  <!-- ===================================================
+       TIMELINE / MILESTONE SECTION
+       =================================================== -->
+  <section class="timeline section" id="timeline">
+    <div class="timeline__glow"></div>
+    <!-- Decorative geometric rings -->
+    <div class="deco-ring deco-ring--1" data-parallax="0.1" aria-hidden="true"></div>
+    <div class="deco-ring deco-ring--2" data-parallax="-0.07" aria-hidden="true"></div>
+    <div class="deco-line deco-line--1" data-parallax="0.05" aria-hidden="true"></div>
+    <div class="container">
+      <div class="timeline__header fade-in">
+        <h3>Our Milestone</h3>
+      </div>
+    </div>
+
+    <div class="timeline__track">
+      <!-- 2020 -->
+      <div class="timeline__item" data-index="0">
+        <span class="timeline__year">2020</span>
+        <div class="timeline__dot-wrap"><div class="timeline__dot"></div></div>
+        <div class="timeline__entry">
+          <div class="timeline__thumb"><img src="assets/milestone_image/2020_opt.jpg" alt="mGanik Nutrition Launch" loading="lazy"></div>
+          <div class="timeline__body">
+            <h3>mGanik Nutrition Launched</h3>
+            <p>Our journey began with mGanik Nutrition, introducing the Food as Medicine approach to help people manage diabetes through science-based nutrition.</p>
           </div>
         </div>
       </div>
+
+      <!-- 2022 -->
+      <div class="timeline__item" data-index="1">
+        <span class="timeline__year">2022</span>
+        <div class="timeline__dot-wrap"><div class="timeline__dot"></div></div>
+        <div class="timeline__entry">
+          <div class="timeline__thumb"><img src="assets/milestone_image/2022_opt.jpg" alt="GOLO Launch" loading="lazy"></div>
+          <div class="timeline__body">
+            <h3>GOLO Launched</h3>
+            <p>We expanded into men's health with GOLO, focusing on sexual wellness and healthier relationships through science-driven solutions.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2023 -->
+      <div class="timeline__item" data-index="2">
+        <span class="timeline__year">2023</span>
+        <div class="timeline__dot-wrap"><div class="timeline__dot"></div></div>
+        <div class="timeline__entry">
+          <div class="timeline__thumb"><img src="assets/milestone_image/2023_opt.jpg" alt="mGanik Care First Clinic" loading="lazy"></div>
+          <div class="timeline__body">
+            <h3>mGanik Care Launched <span class="timeline__subline">(First Branch)</span></h3>
+            <p>The opening of our first clinic marked our transition into medical care, creating a more holistic approach to diabetes management.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2024 -->
+      <div class="timeline__item" data-index="3">
+        <span class="timeline__year">2024</span>
+        <div class="timeline__dot-wrap"><div class="timeline__dot"></div></div>
+        <div class="timeline__entry">
+          <div class="timeline__thumb"><img src="assets/milestone_image/2024_opt.jpg" alt="Revolusi Diabetes" loading="lazy"></div>
+          <div class="timeline__body">
+            <h3>Revolusi Diabetes Launched</h3>
+            <p>We launched the Revolusi Diabetes Community, strengthening our ecosystem through Dr. Kelvin's Medication, Nutrition, and Monitoring framework.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2025 -->
+      <div class="timeline__item" data-index="4">
+        <span class="timeline__year">2025</span>
+        <div class="timeline__dot-wrap"><div class="timeline__dot"></div></div>
+        <div class="timeline__entry">
+          <div class="timeline__thumb"><img src="assets/milestone_image/2025_opt.jpg" alt="Second mGanik Care Clinic" loading="lazy"></div>
+          <div class="timeline__body">
+            <h3>Second mGanik Care Clinic Opened</h3>
+            <p>Following the success of our first clinic, we expanded to serve more people on their journey toward diabetes reversal and remission.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2026 -->
+      <div class="timeline__item" data-index="5">
+        <span class="timeline__year">2026</span>
+        <div class="timeline__dot-wrap"><div class="timeline__dot"></div></div>
+        <div class="timeline__entry">
+          <div class="timeline__thumb"><img src="assets/milestone_image/2026_opt.jpg" alt="Third mGanik Care Clinic" loading="lazy"></div>
+          <div class="timeline__body">
+            <h3>Third mGanik Care Clinic Opened</h3>
+            <p>Our third clinic reflects our continued commitment to expanding access to specialized metabolic healthcare across Indonesia.</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -230,7 +219,7 @@
   <section class="news section" id="news" style="display:none;">
     <div class="container">
       <div class="news__header fade-in">
-        <h2><em>Insight</em> & News</h2>
+        <h3><em>Insight</em> & News</h3>
       </div>
 
       <div class="news__grid">
@@ -285,6 +274,62 @@
     </div>
   </section>
 
+  <!-- ===================================================
+       CLOSING IMPACT SECTION
+       =================================================== -->
+  <section class="closing-impact section" id="impact">
+    <!-- Decorative floating dots -->
+    <div class="deco-dot deco-dot--1" data-parallax="0.09" aria-hidden="true"></div>
+    <div class="deco-dot deco-dot--2" data-parallax="-0.06" aria-hidden="true"></div>
+    <div class="deco-dot deco-dot--3" data-parallax="0.12" aria-hidden="true"></div>
+    <div class="deco-dot deco-dot--4" data-parallax="-0.08" aria-hidden="true"></div>
+    <div class="container">
+      <div class="closing__grid">
+        
+        <!-- Text Column -->
+        <div class="closing__text fade-in">
+          <h2>Building Health,<br>Creating Impact</h2>
+          <div class="closing__body">
+            <p>At MGMI, we bring together healthcare, health & wellness products, technology, and exceptional people to improve people's health.</p>
+            <p>Everything we build, our innovations, systems, and people is guided by one purpose, that is creating meaningful impact for the people we serve.</p>
+            <p><strong class="text-brown">As our people grow, so does our impact.</strong></p>
+            <p>Because meaningful change starts with people who never stop learning, improving, and innovating.</p>
+          </div>
+          <h3 class="closing__signoff">Building Health.<br>Growing People.<br>Creating Impact.</h3>
+        </div>
+
+        <!-- Image Collage Column -->
+        <div class="closing__collage fade-in">
+          <!-- Item 1: Large primary image -->
+          <div class="collage__item item--large">
+            <img src="assets/final_section_image/IMG_8291_opt.jpg" alt="MGMI Team" loading="lazy">
+          </div>
+          <!-- Item 2: Tall secondary -->
+          <div class="collage__item item--tall">
+            <img src="assets/final_section_image/MG2_6325_opt.jpg" alt="MGMI Impact" loading="lazy">
+          </div>
+          <!-- Item 3: Wide -->
+          <div class="collage__item item--wide">
+            <img src="assets/final_section_image/IMG_0588_opt.jpg" alt="MGMI Culture" loading="lazy">
+          </div>
+          <!-- Item 4: Standard -->
+          <div class="collage__item">
+            <img src="assets/final_section_image/DSC09221_opt.jpg" alt="MGMI Innovation" loading="lazy">
+          </div>
+          <!-- Item 5: Standard -->
+          <div class="collage__item">
+            <img src="assets/final_section_image/wound care dok kelvin_opt.jpg" alt="Medical Care" class="img-zoom" loading="lazy">
+          </div>
+          <!-- Item 6: Wide base interlocking -->
+          <div class="collage__item item--wide">
+            <img src="assets/final_section_image/DJI_20260416164927_0191_D_A01_opt.jpg" alt="MGMI Facilities" loading="lazy">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ===== FOOTER ===== -->
   <footer class="footer" id="footer">
     <div class="container">
@@ -332,6 +377,6 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="js/main.js?v=9"></script>
+  <script src="js/main.js?v=11"></script>
 </body>
 </html>
