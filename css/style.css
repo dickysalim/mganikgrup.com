@@ -440,7 +440,7 @@ p {
   justify-content: center;
   text-align: center;
   padding: 40px 40px 40px;
-  overflow: visible;
+  overflow: hidden;
   gap: 28px;
   box-shadow: inset 0 0 200px 40px rgba(2, 6, 18, 0.35);
 }
@@ -872,7 +872,7 @@ p {
 }
 
 .brands__header h3 {
-  background: linear-gradient(135deg, #8B7355 20%, var(--gold) 50%, #8B7355 80%);
+  background: linear-gradient(135deg, #746D66 20%, #C7BBAE 50%, #746D66 80%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1787,7 +1787,7 @@ p {
 }
 
 /* Hide decorative elements on mobile for performance */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   #ambientParticles,
   .deco-orb,
   .deco-ring,
@@ -2015,9 +2015,52 @@ p {
 }
 
 /* ===================================================
-   RESPONSIVE — TABLET (≤ 768px)
+   RESPONSIVE — TABLET (≤ 1024px)
    =================================================== */
-@media (max-width: 768px) {
+@media (max-width: 1024px) and (min-width: 768px) {
+  .hero {
+    padding: 40px 24px;
+    min-height: auto;
+  }
+
+  .hero__content {
+    max-width: 720px;
+  }
+
+  .hero__title {
+    font-size: 42px;
+  }
+
+  .brands__grid {
+    gap: 20px;
+  }
+
+  .brand-card__image {
+    height: 200px;
+  }
+
+  .closing__grid {
+    gap: 40px;
+  }
+
+  .closing__collage {
+    grid-auto-rows: 140px;
+  }
+
+  .footer__top {
+    grid-template-columns: 1.2fr 1fr auto;
+    gap: 24px;
+  }
+
+  .timeline__track {
+    padding: 0 20px;
+  }
+}
+
+/* ===================================================
+   RESPONSIVE — MOBILE (≤ 767px)
+   =================================================== */
+@media (max-width: 767px) {
 
   /* --- Global --- */
   :root {
@@ -2243,6 +2286,10 @@ p {
     height: 200px;
   }
 
+  .brand-card__image img {
+    object-position: center 70%;
+  }
+
   .brand-card__info {
     padding: 24px;
   }
@@ -2347,6 +2394,16 @@ p {
 
   .timeline__item {
     grid-template-columns: 50px 32px 1fr;
+    margin-bottom: 32px;
+  }
+
+  .timeline__item:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Extend the vertical connecting line to bridge the gap */
+  .timeline__item .timeline__dot-wrap::before {
+    bottom: -32px;
   }
 
   .timeline__year {
@@ -2394,23 +2451,50 @@ p {
   }
 
   .closing__collage {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 120px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 220px 180px 150px 140px;
+    gap: 8px;
   }
 
-  .item--large {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
-
-  .item--tall {
+  /* Reset ALL desktop span overrides */
+  .closing__collage .item--large,
+  .closing__collage .item--tall,
+  .closing__collage .item--wide,
+  .closing__collage .collage__item {
     grid-column: span 1;
-    grid-row: span 2;
+    grid-row: span 1;
   }
 
-  .item--wide {
-    grid-column: span 2;
-    grid-row: span 1;
+  /* Row 1: Full-width hero (large award photo) */
+  .closing__collage .collage__item:nth-child(1) {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  /* Row 2: Portrait + Landscape side by side */
+  .closing__collage .collage__item:nth-child(2) {
+    grid-column: 1;
+    grid-row: 2 / 4; /* tall — spans 2 rows */
+  }
+  .closing__collage .collage__item:nth-child(3) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  /* Row 3: Small square next to the continuing portrait */
+  .closing__collage .collage__item:nth-child(4) {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  /* Row 4: Small square + Landscape side by side */
+  .closing__collage .collage__item:nth-child(5) {
+    grid-column: 1;
+    grid-row: 4;
+  }
+  .closing__collage .collage__item:nth-child(6) {
+    grid-column: 2;
+    grid-row: 4;
   }
 }
 
@@ -2538,7 +2622,8 @@ p {
   }
 
   .closing__collage {
-    grid-auto-rows: 100px;
+    grid-template-rows: 180px 150px 120px 110px;
+    gap: 6px;
   }
 
   .closing__body p {
